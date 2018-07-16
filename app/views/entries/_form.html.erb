@@ -1,8 +1,14 @@
+<%# このファイルは、new, editで共有されている。新規登録時も修正時も内容が同じ場合が多いから。もちろん、異なる場合は別々にして良い。 %>
+<%# form_withはrails5.1からの機能。entryオブジェクトを元にURLが自動生成されている。local: trueはAjaxを使用しない指定。%>
 <%= form_with(model: entry, local: true) do |form| %>
+  <%# 保存時にエラーがあった場合%>
   <% if entry.errors.any? %>
     <div id="error_explanation">
+      <%# エラー件数を表示 %>
       <h2><%= pluralize(entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
 
+      <%# エラーの内容を全て表示 %>
+      <%# このレコードに関するエラーはerrorsで参照できる。 %>
       <ul>
       <% entry.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,7 +17,9 @@
     </div>
   <% end %>
 
+  <%# 入力フィールドやチェックボックスなど、それらを表示。 %>
   <div class="field">
+    <%# i18n機能を使えば、そこで設定された名前で表示される。 %>
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
@@ -21,6 +29,7 @@
     <%= form.text_area :body %>
   </div>
 
+  <%# ボタン %>
   <div class="actions">
     <%= form.submit %>
   </div>
