@@ -1,0 +1,29 @@
+Entryモデル内のレコード
+id	title	body
+1	はじめてのエントリー	はじめまして！
+2	2番目のエントリー	おひさしぶりです！
+3	3番目のエントリー	もうくじけました・・・
+Commentモデル内のレコード
+id	body	status	entry_id
+1	てすてす	approved	1
+2	どうもどうも	unapproved	1
+3	こんにちはこんにちは！	approved	3
+
+---
+
+e1 = Entry.create({title: 'はじめてのエントリー', body: 'はじめまして！'})
+e2 = Entry.create({title: '2番目のエントリー', body: 'おひさしぶりです！'})
+e3 = Entry.create({title: '3番目のエントリー', body: 'もうくじけました・・・'})
+
+e1.comments.create([
+  {body: 'てすてす', status: 'approved'},
+  {body: 'どうもどうも', status: 'unapproved'}
+])
+
+e3.comments.create({body: 'こんにちはこんにちは！', status: 'approved'})
+
+---
+
+Comment.where(entry_id: 1).all
+
+Entry.eager_load(:comments).where(comments: {status: 'unapproved'}).all
