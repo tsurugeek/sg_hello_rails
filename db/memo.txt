@@ -1,29 +1,44 @@
+Blogモデル内のレコード
+id	title
+1	ねこがすき！にゃんにゃんブログ
+2	いぬがすき！わんわんブログ
+3	つまがすき！いとうさんブログ
+
 Entryモデル内のレコード
-id	title	body
-1	はじめてのエントリー	はじめまして！
-2	2番目のエントリー	おひさしぶりです！
-3	3番目のエントリー	もうくじけました・・・
+id	title	body	blog_id
+1	はじめてのエントリー	はじめまして！	1
+2	2番目のエントリー	おひさしぶりです！	1
+3	3番目のエントリー	もうくじけました・・・	3
+
 Commentモデル内のレコード
 id	body	status	entry_id
 1	てすてす	approved	1
-2	どうもどうも	unapproved	1
-3	こんにちはこんにちは！	approved	3
+2	ねこはかわいいですよね	unapproved	1
+3	例のねこについて	approved	2
+4	こんにちはこんにちは！	approved	3
 
 ---
 
-e1 = Entry.create({title: 'はじめてのエントリー', body: 'はじめまして！'})
-e2 = Entry.create({title: '2番目のエントリー', body: 'おひさしぶりです！'})
-e3 = Entry.create({title: '3番目のエントリー', body: 'もうくじけました・・・'})
+b1 = Blog.create({title: 'ねこがすき！にゃんにゃんブログ'})
+b2 = Blog.create({title: 'いぬがすき！わんわんブログ'})
+b3 = Blog.create({title: 'つまがすき！いとうさんブログ'})
+Blog.all
 
-e1.comments.create([
-  {body: 'てすてす', status: 'approved'},
-  {body: 'どうもどうも', status: 'unapproved'}
-])
+e1 = b1.entries.create({title: 'はじめてのエントリー', body: 'はじめまして！'})
+e2 = b1.entries.create({title: '2番目のエントリー', body: 'おひさしぶりです！'})
+e3 = b3.entries.create({title: '3番目のエントリー', body: 'もうくじけました・・・'})
+Entry.all
 
+e1.comments.create({body: 'てすてす', status: 'approved'})
+e1.comments.create({body: 'ねこはかわいいですよね', status: 'unapproved'})
+e2.comments.create({body: '例のねこについて', status: 'approved'})
 e3.comments.create({body: 'こんにちはこんにちは！', status: 'approved'})
+Comment.all
 
 ---
 
-Comment.where(entry_id: 1).all
+Comment.joins(entry: :blog).where(blogs: {id: 1}).all
 
-Entry.eager_load(:comments).where(comments: {status: 'unapproved'}).all
+Blog.where("not exists (select 1 from entries where blog_id = blogs.id)").all
+
+Blog.eager_load(entries: :comments).where(comments: {status: 'unapproved'}).all
