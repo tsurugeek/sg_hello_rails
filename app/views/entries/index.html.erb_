@@ -1,7 +1,7 @@
 <%# frash機能を使ってメッセージが保存されていた場合は、ここで表示する %>
 <p id="notice"><%= notice %></p>
 
-<h1>Entries</h1>
+<h1>Entries(erb)</h1>
 
 <table>
   <thead>
@@ -20,7 +20,7 @@
         <%# routes.rbにresourceメソッドを使用して設定した場合、各URLを生成するメソッドが自動生成される。edit_entry_pathなど。 %>
         <td><%= link_to 'Show', entry %></td>
         <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
-        <%# リンクを押した時にconfirm:の内容が確認ダイアログとして表示される。
+        <%# リンクを押した時にconfirm:の内容が確認ダイアログとして表示される。%>
         <td><%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
