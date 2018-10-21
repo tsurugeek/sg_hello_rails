@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @blog.title
+
+= link_to 'Edit', edit_blog_path(@blog)
+\|
+= link_to 'Back', blogs_path
+
+
+-#------------------------------
+-# 以下、関連するEntryの一覧
+-#------------------------------
+
+
+%h1 Entries
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Body
+      %th{colspan: "3"}
+  %tbody
+  - @blog.entries.each do |entry|
+    %tr
+      %td= entry.title
+      %td= entry.body
+      %td= link_to 'Show', [@blog, entry]
+      %td= link_to 'Edit', edit_blog_entry_path(@blog, entry)
+      %td= link_to 'Destroy', [@blog, entry], method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Entry', new_blog_entry_path(@blog)

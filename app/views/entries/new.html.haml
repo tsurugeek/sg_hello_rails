@@ -1,5 +1,5 @@
-%h1 New Entry(haml)
+%h1= "New Entry: #{@entry.blog.title}"
 
 = render 'form', entry: @entry
 
-= link_to 'Back', entries_path
+= link_to 'Back', @entry.blog

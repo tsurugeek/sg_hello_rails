@@ -42,3 +42,9 @@ Comment.joins(entry: :blog).where(blogs: {id: 1}).all
 Blog.where("not exists (select 1 from entries where blog_id = blogs.id)").all
 
 Blog.eager_load(entries: :comments).where(comments: {status: 'unapproved'}).all
+
+
+---
+scaffold
+---
+bundle exec rails g scaffold blog title:string --skip

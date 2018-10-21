@@ -1,7 +1,7 @@
-%h1 Editing Entry(haml)
+%h1= "Editing Entry: #{@entry.blog.title}"
 
 = render 'form', entry: @entry
 
-= link_to 'Show', @entry
+= link_to 'Show', [@entry.blog, @entry]
 |
-= link_to 'Back', entries_path
+= link_to 'Back', @entry.blog

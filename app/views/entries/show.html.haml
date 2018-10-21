@@ -1,3 +1,5 @@
+%h1= @entry.blog.title
+
 %p#notice= notice
 
 %p
@@ -8,6 +10,47 @@
   %strong Body:
   = @entry.body
 
-= link_to 'Edit', edit_entry_path(@entry)
+= link_to 'Edit', edit_blog_entry_path(@entry.blog, @entry)
 |
-= link_to 'Back', entries_path
+= link_to 'Back', @entry.blog
+
+
+-#------------------------------
+-# 以下、関連するCommentの一覧
+-#------------------------------
+
+
+%h1 Listing comments
+
+%table
+  %thead
+    %tr
+      %th Body
+      %th
+      %th
+
+  %tbody
+    - @entry.comments.each do |comment|
+      %tr
+        %td= (comment.status == 'approved')? comment.body : '（承認待ち）'
+        %td= (comment.status == 'approved')? '' : link_to('Approve', approve_blog_entry_comment_path(@entry.blog, @entry, comment), method: :put)
+        %td= link_to 'Destroy', [@entry.blog, @entry, comment], method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+%h1 New Comment
+
+= form_with(model: @comment, local: true, url: url_for([@entry.blog, @entry, @comment])) do |form|
+  - if @comment.errors.any?
+    %div#error_explanation
+    %h2= pluralize(@comment.errors.count, "error") + "prohibited this comment from being saved:"
+
+    %ul
+      - @comment.errors.full_messages.each do |message|
+        %li= message
+  %div.field
+    = form.label :body
+    = form.text_area :body
+
+  %div.actions
+    = form.submit
