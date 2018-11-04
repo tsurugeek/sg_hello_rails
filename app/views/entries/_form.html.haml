@@ -7,7 +7,7 @@
       - entry.errors.full_messages.each do |message|
         %li= message
   %div.field
-    = form.input :title, input_html: {size: 20}
+    = form.input :title, as: :with_length, input_html: {size: 20}
 
   %div.field
     = form.input :body
