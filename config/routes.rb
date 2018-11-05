@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  root to: "blogs#index"
+  
+  devise_for :users
+
   # 下記一行だけでentriesに関するindex,new,create,edit,update,destroyアクションが追加される。
   resources :blogs do
     resources :entries, except: [:index] do
