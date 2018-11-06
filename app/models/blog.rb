@@ -10,4 +10,9 @@ class Blog < ApplicationRecord
   #--------------------
   validates :title, presence: true
 
+  #--------------------
+  # enum
+  #--------------------
+  enumerize :status, in: [:active, :inactive], predicates: { prefix: true }, scope: true
+
 end

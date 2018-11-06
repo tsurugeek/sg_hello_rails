@@ -9,5 +9,7 @@
   .field
     = f.label :title
     = f.text_field :title
+    = f.label :status
+    = f.select :status, Blog.status.options
   .actions
     = f.submit 'Save'
