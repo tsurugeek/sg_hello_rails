@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  enumerize:
+    blog:
+      status:
+        active: "active!!"
+        inactive: "inactive!!"

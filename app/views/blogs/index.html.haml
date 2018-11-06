@@ -3,6 +3,7 @@
 %table
   %thead
     %tr
+      %th Status
       %th Title
       %th
       %th
@@ -11,6 +12,7 @@
   %tbody
     - @blogs.each do |blog|
       %tr
+        %td= blog.status_text
         %td= blog.title
         %td= link_to 'Show', blog
         %td= link_to 'Edit', edit_blog_path(blog)
