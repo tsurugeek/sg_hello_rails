@@ -66,3 +66,4 @@ gem 'haml-rails'
 # try!
 gem 'simple_form'
 gem 'devise'
+gem 'enumerize'
