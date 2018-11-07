@@ -1,6 +1,11 @@
 class Blog < ApplicationRecord
 
   #--------------------
+  # etc
+  #--------------------
+  mount_uploader :blog_logo, BlogLogoUploader
+
+  #--------------------
   # relation
   #--------------------
   has_many :entries
