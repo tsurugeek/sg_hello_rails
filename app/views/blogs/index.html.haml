@@ -5,6 +5,7 @@
     %tr
       %th Status
       %th Title
+      %th Blog Logo
       %th
       %th
       %th
@@ -14,6 +15,7 @@
       %tr
         %td= blog.status_text
         %td= blog.title
+        %td= image_tag(blog.blog_logo_url(:thumb)) if blog.blog_logo?
         %td= link_to 'Show', blog
         %td= link_to 'Edit', edit_blog_path(blog)
         %td= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' }

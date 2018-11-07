@@ -9,6 +9,7 @@
 %p
   %b Blog Logo:
   = image_tag(@blog.blog_logo_url) if @blog.blog_logo?
+  = image_tag(@blog.blog_logo_url(:thumb)) if @blog.blog_logo?
 
 = link_to 'Edit', edit_blog_path(@blog)
 \|
