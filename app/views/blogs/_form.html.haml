@@ -11,5 +11,12 @@
     = f.text_field :title
     = f.label :status
     = f.select :status, Blog.status.options
+    = f.label :blog_logo
+    = f.file_field :blog_logo
+    = image_tag(@blog.blog_logo_url) if @blog.blog_logo?
+    = image_tag(@blog.blog_logo_url(:thumb)) if @blog.blog_logo?
+    = "削除"
+    = f.check_box(:remove_blog_logo)
+
   .actions
     = f.submit 'Save'
