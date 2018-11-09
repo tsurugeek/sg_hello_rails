@@ -68,4 +68,6 @@ RSpec.configure do |config|
     end
   end
 
+  # factoryメソッドをショートカットできるようにする
+  config.include FactoryBot::Syntax::Methods
 end
