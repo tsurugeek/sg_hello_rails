@@ -93,4 +93,10 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  # sprintのせいでfactoryメソッドが反映されてないことがあるので毎回reloadする。
+  config.before(:all) do
+    FactoryBot.reload
+  end
+
 end
