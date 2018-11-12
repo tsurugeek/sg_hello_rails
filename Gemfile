@@ -72,3 +72,4 @@ gem 'mini_magick'
 group :test do
   gem 'factory_bot'
 end
+gem 'ransack'
