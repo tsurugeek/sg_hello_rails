@@ -4,7 +4,8 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    @q = Blog.ransack(params[:q])
+    @blogs = @q.result(distinct: true)
   end
 
   # GET /blogs/1
