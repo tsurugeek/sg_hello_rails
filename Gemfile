@@ -78,3 +78,4 @@ group :test do
   gem 'factory_bot'
 end
 gem 'ransack'
+gem 'sendgrid-ruby'
